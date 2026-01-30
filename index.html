@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi thing</title>
+    <meta name="description" content="A mesmerizing double pendulum visualization based on Pi.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Load p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="ui-container">
+        <header>
+            <h1>Pi Pendulum</h1>
+            <p class="subtitle">Mathematical Art Visualizer</p>
+        </header>
+
+        <div id="controls-panel">
+            <div class="control-group">
+                <h3>Controls</h3>
+                <ul>
+                    <li><span class="key">SPACE</span> Pause / Resume</li>
+                    <li><span class="key">↑</span> / <span class="key">↓</span> Iterations per frame</li>
+                    <li><span class="key">←</span> / <span class="key">→</span> Time Speed</li>
+                    <li><span class="key">T</span> Toggle Perm Trail</li>
+                    <li><span class="key">G</span> Toggle Glow</li>
+                    <li><span class="key">P</span> Toggle Colors</li>
+                    <li><span class="key">I</span> Invert Colors</li>
+                    <li><span class="key">S</span> Save Image</li>
+                    <li><span class="key">H</span> Toggle UI</li>
+                </ul>
+
+                <div class="notice">
+                    <p>No music included to avoid copyright issues.</p>
+                    <hr>
+                    <p>Disclaimer: High speeds may lag</p>
+                </div>
+            </div>
+        </div>
+
+        <button id="toggle-btn">Hide UI</button>
+    </div>
+
+    <script src="sketch.js"></script>
+    <script>
+        const container = document.getElementById('ui-container');
+        const btn = document.getElementById('toggle-btn');
+
+        function toggleUI() {
+            container.classList.toggle('hidden');
+            if (container.classList.contains('hidden')) {
+                btn.innerText = 'Show';
+            } else {
+                btn.innerText = 'Hide UI';
+            }
+        }
+
+        btn.addEventListener('click', toggleUI);
+
+        // Listen for H key to toggle UI from global scope too
+        window.addEventListener('keydown', (e) => {
+            // Only if not typing in an input (though we have none)
+            if (e.key === 'h' || e.key === 'H') {
+                toggleUI();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+/* Base Reset & Typography */
+:root {
+    --bg-color: #000;
+    --text-color: #eee;
+    --accent-color: #888;
+    --glass-bg: rgba(20, 20, 20, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-main: 'Inter', sans-serif;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow: hidden;
+    /* Prevent scrollbars */
+    width: 100vw;
+    height: 100vh;
+}
+
+canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* UI Overlay Container */
+#ui-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#ui-container.hidden {
+    transform: translateX(-320px);
+    opacity: 0.5;
+}
+
+/* Header */
+header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    margin: 4px 0 0 0;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 300;
+}
+
+/* Controls Panel */
+#controls-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.control-group h3 {
+    margin: 0 0 12px 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-color);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Key cap style */
+.key {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    min-width: 18px;
+    text-align: center;
+    color: #fff;
+}
+
+.notice {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--glass-border);
+    font-size: 0.8rem;
+    color: #aaa;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.notice p {
+    margin: 0;
+}
+
+.notice hr {
+    border: 0;
+    border-top: 1px solid var(--glass-border);
+    margin: 10px 0;
+}
+
+
+/* Toggle Button */
+#toggle-btn {
+    align-self: flex-start;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* When hidden, button floats just on screen edge */
+#ui-container.hidden #toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    transform: translateX(320px);
+    /* Counteract parent transform to stay visible */
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    #ui-container {
+        width: auto;
+        right: 20px;
+        bottom: 80px;
+        /* Leave space for bottom controls if needed */
+        top: auto;
+    }
+
+    #ui-container.hidden {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    #toggle-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+    }
+
+    #ui-container.hidden #toggle-btn {
+        position: fixed;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
